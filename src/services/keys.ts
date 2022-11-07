@@ -9,3 +9,7 @@ export const usernamesKey = () => 'usernames';
 export const itemsKey = (itemId:string) => `items#${itemId}`;
 export const itemsByViewsKey = () => 'item:views';
 export const itemsByEndingAt = () =>'items:endingAt';
+export const itemsViewsKey = (itemId: string) => `items:views#${itemId}`;
+export const bidHistoryKey = (itemId: string) => `histoy#${itemId}`;
+export const itemsByPriceKey = () => `items:price`;
+export const  itemsIndexKey = () => `idx:items`; 

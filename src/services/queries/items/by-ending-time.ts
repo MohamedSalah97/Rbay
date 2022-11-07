@@ -7,7 +7,7 @@ export const itemsByEndingTime = async (
 	offset = 0,
 	count = 10
 ) => {
-	await client.zRange(itemsByEndingAt(),
+	const ids = await client.zRange(itemsByEndingAt(),
 		Date.now(), 
 		'+inf',{
 			BY: 'SCORE',
@@ -16,5 +16,11 @@ export const itemsByEndingTime = async (
 				count
 			}
 		}
-	)
+	);
+
+	const results = await Promise.all(ids.map(id =>{
+		return client.hGetAll(itemsKey(id));
+	}));
+	
+	return results.map((item , i) => deserialize(ids[i], item));
 };
